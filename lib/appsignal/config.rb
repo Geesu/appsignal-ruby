@@ -47,6 +47,7 @@ module Appsignal
         REQUEST_METHOD REQUEST_PATH SERVER_NAME SERVER_PORT
         SERVER_PROTOCOL
       ],
+      :sample_rate => 1.0,
       :send_environment_metadata => true,
       :send_params => true,
       :sidekiq_report_errors => "all",
@@ -111,6 +112,7 @@ module Appsignal
       "APPSIGNAL_PUSH_API_KEY" => :push_api_key,
       "APPSIGNAL_REQUEST_HEADERS" => :request_headers,
       "APPSIGNAL_RUNNING_IN_CONTAINER" => :running_in_container,
+      "APPSIGNAL_SAMPLE_RATE" => :sample_rate,
       "APPSIGNAL_SEND_ENVIRONMENT_METADATA" => :send_environment_metadata,
       "APPSIGNAL_SEND_PARAMS" => :send_params,
       "APPSIGNAL_SEND_SESSION_DATA" => :send_session_data,
@@ -183,6 +185,7 @@ module Appsignal
     # @api private
     ENV_FLOAT_KEYS = %w[
       APPSIGNAL_CPU_COUNT
+      APPSIGNAL_SAMPLE_RATE
     ].freeze
 
     # @attribute [r] system_config

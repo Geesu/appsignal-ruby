@@ -25,7 +25,7 @@ module Appsignal
       end
 
       def call(env)
-        if Appsignal.active?
+        if Appsignal.active? && sample_request?
           request = request_for(env)
           # Supported nested instrumentation middlewares by checking if there's
           # already a transaction active for this request.
@@ -73,6 +73,10 @@ module Appsignal
       end
 
       private
+
+      def sample_request?
+        rand <= Appsignal.config[:sample_rate]
+      end
 
       # Another instrumentation middleware is active earlier in the stack, so
       # don't report any exceptions here, the top instrumentation middleware
