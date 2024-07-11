@@ -127,7 +127,8 @@ module Appsignal
       :send_environment_metadata => true,
       :send_params => true,
       :send_session_data => true,
-      :sidekiq_report_errors => "all"
+      :sidekiq_report_errors => "all",
+      :sample_rate => 1.0,
     }.freeze
 
     # @api private
@@ -208,7 +209,8 @@ module Appsignal
 
     # @api private
     FLOAT_OPTIONS = {
-      :cpu_count => "APPSIGNAL_CPU_COUNT"
+      :cpu_count => "APPSIGNAL_CPU_COUNT",
+      :sample_rate => "APPSIGNAL_SAMPLE_RATE",
     }.freeze
 
     # @api private
@@ -402,6 +404,7 @@ module Appsignal
       ENV["_APPSIGNAL_BIND_ADDRESS"]                 = config_hash[:bind_address].to_s
       ENV["_APPSIGNAL_CA_FILE_PATH"]                 = config_hash[:ca_file_path].to_s
       ENV["_APPSIGNAL_CPU_COUNT"]                    = config_hash[:cpu_count].to_s
+      ENV["_APPSIGNAL_SAMPLE_RATE"]                  = config_hash[:sample_rate].to_s
       ENV["_APPSIGNAL_DNS_SERVERS"]                  = config_hash[:dns_servers].join(",")
       ENV["_APPSIGNAL_ENABLE_HOST_METRICS"]          = config_hash[:enable_host_metrics].to_s
       ENV["_APPSIGNAL_ENABLE_STATSD"]                = config_hash[:enable_statsd].to_s
